@@ -1,15 +1,75 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
   <meta charset="UTF-8">
   <title>Note App</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js" integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU=" crossorigin="anonymous" defer></script>
-  <script src="scripts/index.js" type="module"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js"
+    integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU=" crossorigin="anonymous" defer></script>
+  <!--<script type="module" src="scripts/index.js"></script>-->
+  <script src="scripts/index.js"></script>
 
   <link rel="stylesheet" href="styles/index.css">
 </head>
-<body>
-<h1>Note App</h1>
 
+<body>
+  <div class="layout">
+    <nav>
+      <label for="createNote" class="btn" onclick="createNote();">
+        <input type="button" id="createNote" name="createNote" value="createNote" class="hidden">
+        <span>Create new Note</span>
+      </label>
+      <select name="styles" id="styles">
+        <option value="volvo">Black White-Style</option>
+        <option value="volvo">Green-Style</option>
+      </select>
+    </nav>
+    <div class="subnav">
+      <div class="btn btn-radio">
+        <label for="finishdate">
+          <input id="finishdate" type="radio" name="sorting" value="finishdate" class="hidden" required="required"
+            checked>
+          <span>By finish Date</span>
+        </label>
+        <label for="createddate">
+          <input id="createddate" type="radio" name="sorting" value="createddate" class="hidden" required="required">
+          <span>By created Date</span>
+        </label>
+        <label for="importance">
+          <input id="importance" type="radio" name="sorting" value="importance" class="hidden" required="required">
+          <span>By Importance</span>
+        </label>
+      </div>
+      <label for="showFinished" class="btn">
+        <input type="checkbox" id="showFinished" name="showFinished" value="showFinished" class="hidden">
+        <span>Show finished</span>
+      </label>
+    </div>
+    <ul>
+      <li>
+        <div class="colContent">
+          <div class="col1">
+            <span>Nächsten Mittwoch</span>
+            <label for="statusCheckbox">
+              <input type="checkbox" id="statusCheckbox" name="statusCheckbox" value="statusCheckbox">
+              <span>Finished [ Today ]</span>
+            </label>
+          </div>
+          <div class="col2">
+            <div>
+              <span>CAS FEE Selbststudium / Projekt Aufgabe erledigen</span>
+              <span>asdf</span>
+            </div>
+            <textarea name="description" rows="2" cols="100">HTML für die note App erstellen.<br>CSS erstellen für die note App[...]</textarea>
+          </div>
+        </div>
+        <label for="editNote" class="btn editNote">
+          <input type="button" id="editNote" name="editNote" value="editNote" class="hidden">
+          <span>Edit</span>
+        </label>
+      </li>
+    </ul>
+  </div>
 </body>
+
 </html>

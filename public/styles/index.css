@@ -1,3 +1,126 @@
 * {
     box-sizing: border-box;
 }
+
+/* Layout for notes list */
+.layout nav {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin-bottom: 1em;
+}
+
+.layout .subnav {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin-bottom: 1em;
+}
+
+.layout ul, li {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.layout li {
+    display: flex;
+    justify-content: space-between;
+}
+
+.layout .colContent {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.layout .col1, .col2 {
+    display: flex;
+    flex-direction: column;
+    margin: 1em 3em 0em 0em;
+}
+
+.layout .editNote {
+    align-self: flex-end;
+}
+
+/* Toggle & Checkbox Buttons */
+.btn form > div {
+    margin-bottom: 1em; overflow: auto;
+}
+
+.btn label {
+    display: block;
+    float: left;
+}
+
+.btn {
+    box-shadow: 3px 3px rgb(124, 124, 124);
+}
+
+.btn .hidden {
+    opacity: 0; 
+    position: absolute; 
+    pointer-events: none;
+}
+
+.btn label:first-child span {
+    border-left: 1px solid black;
+}
+
+.btn span {
+    display: block;
+    border: 1px solid black;
+    padding: 5px 10px;
+}
+
+.btn-radio span {
+    border-left: 0;
+}
+
+.btn input:checked + span {
+    background: silver;
+}
+
+.btn input:hover + span {
+    background: silver;
+}
+
+/* Layout for one note */
+.note {
+    display: flex;
+    flex-direction: column;
+}
+
+.note > * {
+    margin-top: 0.5em;
+}
+
+.note label > span {
+    width: 250px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.5em;
+}
+
+.buttonContainer .cancel {
+    width: 100px;
+}
+
+.importanceicons {
+    display: inline;
+}
+
+.importanceicons span {
+    margin-right: 0.5em;
+    color:rgb(185, 185, 185);
+}
+
+.importanceicons span .checked{
+    color: black;
+}
