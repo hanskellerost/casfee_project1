@@ -15,7 +15,7 @@
   "author": "Michael Gfeller",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^7.21.0",
+    "eslint": "^7.25.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "html-validator-cli": "^7.0.1",

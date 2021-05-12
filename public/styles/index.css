@@ -1,5 +1,19 @@
+:root {
+    --bgc: white;
+    --bgc-dark: darkgreen;
+}
+
 * {
     box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+}
+
+body {
+    background-color: var(--bgc);
+}
+
+.dark-theme {
+    background-color: var(--bgc-dark);
 }
 
 /* Layout for notes list */

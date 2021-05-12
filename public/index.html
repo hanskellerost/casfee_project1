@@ -9,6 +9,8 @@
   <!--<script type="module" src="scripts/index.js"></script>-->
   <script src="scripts/index.js"></script>
 
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/index.css">
 </head>
 
@@ -19,7 +21,7 @@
         <input type="button" id="createNote" name="createNote" value="createNote" class="hidden">
         <span>Create new Note</span>
       </label>
-      <select name="styles" id="styles">
+      <select name="styles" id="styles" onchange="changeStyle()">
         <option value="volvo">Black White-Style</option>
         <option value="volvo">Green-Style</option>
       </select>
