@@ -1,6 +1,6 @@
 function changeStyle() {
     console.log('changeStyle');
-    document.body.classList.toggle("dark-theme");
+    document.body.classList.toggle('dark-theme');
 }
 
 function readNotes() {
@@ -22,12 +22,36 @@ function updateNote() {
 function deleteNote() {
     console.log('deleteNote');
 }
-const x = 3;
-let y = 2;
-console.log(`x ${x}`);
-console.log(`y: ${y}`);
 
-y = 5;
+function sortNotes(orderby) {
+    console.log('tada');
+}
 
-console.log(`y: ${y}`);
-console.log("Test");
+const notes
+
+// createNote
+const createNoteBtn = document.querySelector('#createNote');
+createNoteBtn.addEventListener('click', () => {
+    createNote();
+});
+
+// sorting
+const finishdateBtn = document.querySelector('#finishdate');
+const createddateBtn = document.querySelector('#createddate');
+const importanceBtn = document.querySelector('#importance');
+
+const sortingEvent = (ev) => {
+    if (ev.target.dataset.orderby) {
+        sortNotes(ev);
+    }
+};
+
+finishdateBtn.addEventListener('click', sortingEvent);
+createddateBtn.addEventListener('click', sortingEvent);
+importanceBtn.addEventListener('click', sortingEvent);
+
+// change Color
+const changeStyleBtn = document.querySelector('#styles');
+changeStyleBtn.addEventListener('onchange', () => {
+    changeStyle();
+});
