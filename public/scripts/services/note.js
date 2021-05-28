@@ -1,5 +1,6 @@
 export default class Note {
-    constructor(status, subject, description, importance, startDate, finishDate) {
+    constructor(id, status, subject, description, importance, startDate, finishDate) {
+        this.id = id;
         this.status = status;
         this.subject = subject;
         this.description = description;

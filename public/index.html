@@ -32,7 +32,7 @@
           <span>By finish Date</span>
         </label>
         <label for="createdDate">
-          <input id="createdDate" type="radio" name="sorting" value="createdDate" class="hidden" required="required" data-orderby="createDate">
+          <input id="createdDate" type="radio" name="sorting" value="createdDate" class="hidden" required="required" data-orderby="createdDate">
           <span>By created Date</span>
         </label>
         <label for="importance">
@@ -41,36 +41,13 @@
         </label>
       </div>
       <label for="showFinished" class="btn">
-        <input type="checkbox" id="showFinished" name="showFinished" value="showFinished" class="hidden">
+        <input type="checkbox" id="showFinished" name="showFinished" value="showFinished" class="hidden" data-filterby="finished">
         <span>Show finished</span>
       </label>
     </div>
     <ul id="notesContent">
-      <!--<li id="liContent">
-        <div class="colContent">
-          <div class="col1">
-            <span>Nächsten Mittwoch</span>
-            <label for="statusCheckbox">
-              <input type="checkbox" id="statusCheckbox" name="statusCheckbox" value="statusCheckbox">
-              <span>Finished [ Today ]</span>
-            </label>
-          </div>
-          <div class="col2">
-            <div>
-              <span>CAS FEE Selbststudium / Projekt Aufgabe erledigen</span>
-              <span>asdf</span>
-            </div>
-            <textarea name="description" rows="2" cols="100">HTML für die note App erstellen.<br>CSS erstellen für die note App[...]</textarea>
-          </div>
-        </div>
-        <label for="editNote" class="btn editNote">
-          <input type="button" id="editNote" name="editNote" value="editNote" class="hidden">
-          <span>Edit</span>
-        </label>
-      </li>-->
     </ul>
   </div>
-  <!--<script type="module" src="scripts/index.js"></script>-->
   <script id="entry-template" type="text/x-handlebars-template">
     <div class="colContent">
       <div class="col1">
@@ -83,6 +60,8 @@
       <div class="col2">
         <div>
           <span>{{subject}}</span>
+          <!--<span>CreatedDate: {{startDate}}</span>
+          <span>FinishDate: {{finishDate}}</span>-->
         </div>
         <textarea name="description" rows="2" cols="100">{{description}}</textarea>
       </div>

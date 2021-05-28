@@ -1,5 +1,5 @@
 /* global Handlebars */
-
+// import moment from 'moment';
 import { noteService } from '../services/note-service.js';
 
 export default class NoteController {
@@ -11,8 +11,38 @@ export default class NoteController {
         this.createddateBtn = document.querySelector('#createdDate');
         this.importanceBtn = document.querySelector('#importance');
 
+        this.filterBtn = document.querySelector('#showFinished');
+
         this.noteTemplate = Handlebars.compile(document.querySelector('#entry-template').innerHTML);
         this.notesContent = document.querySelector('#notesContent');
+
+        // const DateFormats = {
+        //     short: 'DD MMMM - YYYY',
+        //     long: 'dddd DD.MM.YYYY HH:mm',
+        // };
+
+        // Handlebars.registerHelper('formatDate', (datetime, format) => {
+        //     if (moment) {
+        //         // eslint-disable-next-line no-param-reassign
+        //         format = DateFormats[format] || format;
+        //         return moment(datetime).format(format);
+        //     }
+        //     return datetime;
+        // });
+        this.orderBy = this.finishdateBtn.dataset.orderby;
+        this.filterBy = null;
+    }
+
+    initButtons() {
+        this.createNoteBtn.addEventListener('click', () => {
+            this.noteService.createNote();
+        });
+
+        this.finishdateBtn.addEventListener('click', this.orderEvent.bind(this));
+        this.createddateBtn.addEventListener('click', this.orderEvent.bind(this));
+        this.importanceBtn.addEventListener('click', this.orderEvent.bind(this));
+
+        this.filterBtn.addEventListener('change', this.filteringEvent.bind(this));
     }
 
     initStyleSelect() {
@@ -21,21 +51,8 @@ export default class NoteController {
         });
     }
 
-    initCreateButton() {
-        this.createNoteBtn.addEventListener('click', () => {
-            this.noteService.createNote();
-        });
-    }
-
-    initSortButtons() {
-        this.finishdateBtn.addEventListener('click', this.sortingEvent());
-        this.createddateBtn.addEventListener('click', this.sortingEvent);
-        this.importanceBtn.addEventListener('click', this.sortingEvent);
-    }
-
     initEventHandlers() {
-        this.initCreateButton();
-        this.initSortButtons();
+        this.initButtons();
         this.initStyleSelect();
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -44,40 +61,34 @@ export default class NoteController {
     }
 
     initializeTemplate() {
+        this.notesContent.textContent = '';
         for (const n of noteService.notes) {
             let html = this.noteTemplate(n);
-            let divElement = document.createElement('li');
+            const divElement = document.createElement('li');
             divElement.setAttribute('id', 'liContent');
             divElement.innerHTML = html;
-            notesContent.appendChild(divElement);
+            this.notesContent.appendChild(divElement);
         }
     }
 
-    sortNotes(orderby) {
-        console.log(this);
-        noteService.notes = noteService.notes.sort((a, b) => {
-            if (orderby === 'importance') {
-                return a.importance - b.importance;
-            }
-            if (orderby === 'startDate') {
-                return a.startDate - b.startDate;
-            }
-            return a.finishDate - b.finishDate;
-        });
+    getEvents() {
+        noteService.readNotes(this.orderBy, this.filterBy);
+        this.initializeTemplate();
     }
 
-    sortingEvent(ev) {
-       // const { orderby } = ev.target.dataset;
-       const orderby = 'priority';
-        if (orderby) {
-            this.sortNotes(orderby);
-        }
-        //this.initializeTemplate();
+    filteringEvent(ev) {
+        this.filterBy = ev.target.checked ? ev.target.dataset.filterby : null;
+        this.getEvents();
+    }
+
+    orderEvent(ev) {
+        this.orderBy = ev.target.dataset.orderby;
+        this.getEvents();
     }
 
     initialize() {
         this.initEventHandlers();
-        noteService.readNotes();
+        noteService.readNotes(this.orderBy);
     }
 }
 
