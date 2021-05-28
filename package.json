@@ -23,6 +23,7 @@
     "stylelint-config-standard": "^21.0.0"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "handlebars": "^4.7.7"
   }
 }

@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/index.css">
+  <script src="scripts/controllers/note-controller.js" type="module" defer></script>
 </head>
 
 <body>
@@ -26,12 +27,12 @@
     </nav>
     <div class="subnav">
       <div class="btn btn-radio">
-        <label for="finishdate">
-          <input id="finishdate" type="radio" name="sorting" value="finishdate" class="hidden" required="required" checked data-orderby="finishdate">
+        <label for="finishDate">
+          <input id="finishDate" type="radio" name="sorting" value="finishDate" class="hidden" required="required" checked data-orderby="finishDate">
           <span>By finish Date</span>
         </label>
-        <label for="createddate">
-          <input id="createddate" type="radio" name="sorting" value="createddate" class="hidden" required="required" data-orderby="createdate">
+        <label for="createdDate">
+          <input id="createdDate" type="radio" name="sorting" value="createdDate" class="hidden" required="required" data-orderby="createDate">
           <span>By created Date</span>
         </label>
         <label for="importance">
@@ -44,8 +45,8 @@
         <span>Show finished</span>
       </label>
     </div>
-    <ul>
-      <li>
+    <ul id="notesContent">
+      <!--<li id="liContent">
         <div class="colContent">
           <div class="col1">
             <span>Nächsten Mittwoch</span>
@@ -66,10 +67,30 @@
           <input type="button" id="editNote" name="editNote" value="editNote" class="hidden">
           <span>Edit</span>
         </label>
-      </li>
+      </li>-->
     </ul>
   </div>
+  <!--<script type="module" src="scripts/index.js"></script>-->
+  <script id="entry-template" type="text/x-handlebars-template">
+    <div class="colContent">
+      <div class="col1">
+        <span>Nächsten Mittwoch</span>
+        <label for="statusCheckbox">
+          <input type="checkbox" id="statusCheckbox" name="statusCheckbox" value="statusCheckbox">
+          <span>{{status}} [ Today ]</span>
+        </label>
+      </div>
+      <div class="col2">
+        <div>
+          <span>{{subject}}</span>
+        </div>
+        <textarea name="description" rows="2" cols="100">{{description}}</textarea>
+      </div>
+    </div>
+    <label for="editNote" class="btn editNote">
+      <input type="button" id="editNote" name="editNote" value="editNote" class="hidden">
+      <span>Edit</span>
+    </label>
+  </script>
 </body>
-<!--<script type="module" src="scripts/index.js"></script>-->
-<script src="scripts/index.js"></script>
 </html>
