@@ -4,6 +4,8 @@ import { noteService } from '../services/note-service.js';
 
 export default class NoteController {
     constructor() {
+        this.notes = [];
+
         this.changeStyleBtn = document.querySelector('#styles');
         this.createNoteBtn = document.querySelector('#createNote');
 
@@ -16,7 +18,7 @@ export default class NoteController {
         this.noteTemplate = Handlebars.compile(document.querySelector('#entry-template').innerHTML);
         this.notesContent = document.querySelector('#notesContent');
 
-        // const DateFormats = {
+        // const DateFormatcreateNotes = {
         //     short: 'DD MMMM - YYYY',
         //     long: 'dddd DD.MM.YYYY HH:mm',
         // };
@@ -35,7 +37,7 @@ export default class NoteController {
 
     initButtons() {
         this.createNoteBtn.addEventListener('click', () => {
-            this.noteService.createNote();
+            window.location.href = `note.html?note=`;
         });
 
         this.finishdateBtn.addEventListener('click', this.orderEvent.bind(this));
@@ -45,6 +47,15 @@ export default class NoteController {
         this.filterBtn.addEventListener('change', this.filteringEvent.bind(this));
     }
 
+    initEditButtons() {
+        const editButtons = document.querySelectorAll('.editNoteBtn');
+        editButtons.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                window.location.href = `note.html?note=${btn.dataset.noteid}`;
+            });
+        })
+    }
+
     initStyleSelect() {
         this.changeStyleBtn.addEventListener('change', () => {
             document.body.classList.toggle('dark-theme');
@@ -52,8 +63,8 @@ export default class NoteController {
     }
 
     initEventHandlers() {
-        this.initButtons();
         this.initStyleSelect();
+        this.initButtons();
 
         document.addEventListener('DOMContentLoaded', () => {
             this.initializeTemplate();
@@ -62,33 +73,35 @@ export default class NoteController {
 
     initializeTemplate() {
         this.notesContent.textContent = '';
-        for (const n of noteService.notes) {
+        for (const n of this.notes) {
             let html = this.noteTemplate(n);
             const divElement = document.createElement('li');
             divElement.setAttribute('id', 'liContent');
             divElement.innerHTML = html;
             this.notesContent.appendChild(divElement);
         }
+
+        this.initEditButtons();
     }
 
-    getEvents() {
-        noteService.readNotes(this.orderBy, this.filterBy);
+    getNotes() {
+        this.notes = noteService.readNotes(this.orderBy, this.filterBy);
         this.initializeTemplate();
     }
 
     filteringEvent(ev) {
         this.filterBy = ev.target.checked ? ev.target.dataset.filterby : null;
-        this.getEvents();
+        this.getNotes();
     }
 
     orderEvent(ev) {
         this.orderBy = ev.target.dataset.orderby;
-        this.getEvents();
+        this.getNotes();
     }
 
     initialize() {
         this.initEventHandlers();
-        noteService.readNotes(this.orderBy);
+        this.notes = noteService.readNotes(this.orderBy);
     }
 }
 

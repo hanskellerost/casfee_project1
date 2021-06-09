@@ -7,42 +7,48 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js"
         integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU=" crossorigin="anonymous" defer></script>
     <script src="https://kit.fontawesome.com/ca66a7c21a.js" crossorigin="anonymous"></script>
-    <script src="scripts/index.js" type="module"></script>
+    <script src="scripts/controllers/noteDetail-controller.js" type="module" defer></script>
     
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/index.css">
+    <script id="entry-template" type="text/x-handlebars-template">
+        <div class="note">
+            <label for="title">
+                <span>Title</span>
+                <input type="text" id="title" name="title" size="73" value="{{subject}}">
+            </label>
+            <label for="description">
+                <span>Description</span>
+                <textarea id="description" name="description" rows="2" cols="75">{{description}}</textarea>
+            </label>
+            <label for="importance">
+                <span>Importance</span>
+                <div id="importance" class="importanceicons">
+                    <span class="fas fa-bolt checked"></span>
+                    <span class="fas fa-bolt checked"></span>
+                    <span class="fas fa-bolt checked"></span>
+                    <span class="fas fa-bolt"></span>
+                    <span class="fas fa-bolt"></span>
+                </div>
+            </label>
+            <label for="endDate">
+                <span>End date</span>
+                <input type="date" id="endDate" name="endDate">
+            </label>       
+            <button type="button" id="saveBtn" class="btn" name="saveNote">Save</button>
+        </div>
+        <div class="buttonContainer">
+            <button type="button" id="cancelBtn" class="btn" name="cancel">Cancel</button>
+        </div>
+    </script>
 </head>
 
 <body>
-    <div class="note">
-        <label for="title">
-            <span>Title</span>
-            <input type="text" id="title" name="title" size="73">
-        </label>
-        <label for="description">
-            <span>Description</span>
-            <textarea id="description" name="description" rows="2" cols="75">HTML für die note App erstellen.<br>CSS erstellen für die note App[...]</textarea>
-        </label>
-        <label for="importance">
-            <span>Importance</span>
-            <div id="importance" class="importanceicons">
-                <span class="fas fa-bolt checked"></span>
-                <span class="fas fa-bolt checked"></span>
-                <span class="fas fa-bolt checked"></span>
-                <span class="fas fa-bolt"></span>
-                <span class="fas fa-bolt"></span>
-            </div>
-        </label>
-        <label for="endDate">
-            <span>End date</span>
-            <input type="date" id="title" name="title">
-        </label>
-        <button type="button" class="btn" name="saveNote">Save</button>
-    </div>
-    <div class="buttonContainer">
-        <button type="button" class="btn cancel" name="cancel">Cancel</button>
-    </div>
+    <form id="noteForm">
+        <div id="noteContent">
+        </div>
+    </form>
 </body>
 
 </html>
