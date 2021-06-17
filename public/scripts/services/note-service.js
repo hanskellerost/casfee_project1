@@ -21,7 +21,40 @@ export class NoteService {
         this.notes.push(note5);
     }
 
-    readNotes(orderBy, filterBy) {
+    async readNotes(orderBy, filterBy) {
+        /* const readNotesRequest = new Request('/notes/', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }); */
+
+        const response = await fetch('/notes/').then((response) => response.json()).then((data) => { _setItems(data); console.warn(this.notes); return data; });
+        return response;
+
+        /*
+        fetch('/notes/')
+        .then(function(data) {
+            console.log(data);
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+        
+        fetch('notes', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then((resp) => resp.json())
+        .then(function(data) {
+            console.log(data);
+        })
+        .catch(function(error) {
+            console.log(error);
+        }); 
+
         //this.initializeNotes();
         let notes = this.notes;
 
@@ -48,7 +81,11 @@ export class NoteService {
                 return comp1 - comp2;
             });
         }
-        return notes;
+        return notes;*/
+    }
+
+    _setItems(data) {
+        this.notes = data;
     }
 
     readNote(id) {

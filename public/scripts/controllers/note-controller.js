@@ -100,8 +100,8 @@ export default class NoteController {
     }
 
     initialize() {
-        this.initEventHandlers();
         this.notes = noteService.readNotes(this.orderBy);
+        this.initEventHandlers();
     }
 }
 
