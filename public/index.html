@@ -66,7 +66,10 @@
         <textarea name="description" rows="2" cols="100">{{description}}</textarea>
       </div>
     </div>
-    <button class="btn editNote editNoteBtn" data-noteid="{{id}}">Edit</button> 
+    <div class="buttons">
+      <button class="btn deleteNoteBtn" data-noteid="{{_id}}">Delete</button> 
+      <button class="btn editNoteBtn" data-noteid="{{_id}}">Edit</button> 
+    </div>
   </script>
 </body>
 </html>

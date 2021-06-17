@@ -17,8 +17,8 @@ export default class NoteDetailController {
 
         this.saveNote = document.querySelector('#saveBtn');
         this.saveNote.addEventListener('click', () => {
-            this.createNote();
-            window.location.href = 'index.html';
+            const note = this.createNote();
+            //window.location.href = 'index.html';
         });
     }
 

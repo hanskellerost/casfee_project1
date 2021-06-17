@@ -18,26 +18,13 @@ export default class NoteController {
         this.noteTemplate = Handlebars.compile(document.querySelector('#entry-template').innerHTML);
         this.notesContent = document.querySelector('#notesContent');
 
-        // const DateFormatcreateNotes = {
-        //     short: 'DD MMMM - YYYY',
-        //     long: 'dddd DD.MM.YYYY HH:mm',
-        // };
-
-        // Handlebars.registerHelper('formatDate', (datetime, format) => {
-        //     if (moment) {
-        //         // eslint-disable-next-line no-param-reassign
-        //         format = DateFormats[format] || format;
-        //         return moment(datetime).format(format);
-        //     }
-        //     return datetime;
-        // });
         this.orderBy = this.finishdateBtn.dataset.orderby;
         this.filterBy = null;
     }
 
     initButtons() {
         this.createNoteBtn.addEventListener('click', () => {
-            window.location.href = `note.html?note=`;
+            window.location.href = 'note.html?note=';
         });
 
         this.finishdateBtn.addEventListener('click', this.orderEvent.bind(this));
@@ -47,13 +34,27 @@ export default class NoteController {
         this.filterBtn.addEventListener('change', this.filteringEvent.bind(this));
     }
 
-    initEditButtons() {
+    initEditButton() {
         const editButtons = document.querySelectorAll('.editNoteBtn');
         editButtons.forEach((btn) => {
             btn.addEventListener('click', () => {
                 window.location.href = `note.html?note=${btn.dataset.noteid}`;
             });
         })
+    }
+
+    async initDeleteButton() {
+        const deleteButtons = document.querySelectorAll('.deleteNoteBtn');
+        deleteButtons.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                try {
+                    const deleteResult = noteService.deleteNote(btn.dataset.noteid);
+                    if (deleteResult) this.initializeTemplate();
+                } catch (ex) {
+                    console.error(ex);
+                }
+            });
+        });
     }
 
     initStyleSelect() {
@@ -66,22 +67,21 @@ export default class NoteController {
         this.initStyleSelect();
         this.initButtons();
 
-        document.addEventListener('DOMContentLoaded', () => {
-            this.initializeTemplate();
-        });
+        this.initializeTemplate();
     }
 
     initializeTemplate() {
         this.notesContent.textContent = '';
         for (const n of this.notes) {
-            let html = this.noteTemplate(n);
+            const html = this.noteTemplate(n);
             const divElement = document.createElement('li');
             divElement.setAttribute('id', 'liContent');
             divElement.innerHTML = html;
             this.notesContent.appendChild(divElement);
         }
 
-        this.initEditButtons();
+        this.initEditButton();
+        this.initDeleteButton();
     }
 
     getNotes() {
@@ -99,8 +99,8 @@ export default class NoteController {
         this.getNotes();
     }
 
-    initialize() {
-        this.notes = noteService.readNotes(this.orderBy);
+    async initialize() {
+        this.notes = await noteService.readNotes(this.orderBy);
         this.initEventHandlers();
     }
 }

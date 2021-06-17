@@ -21,6 +21,7 @@ export class NoteController {
     }
 
     async createNote(req, res) {
+        console.log(req.body);
         noteStore.create(req.body, (err, note) => {
             if (note) {
                 return res.send(note);
