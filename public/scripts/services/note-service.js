@@ -3,28 +3,24 @@
 export class NoteService {
     constructor() {
         this.notes = [];
+        this.customHeaders = new Headers({'Content-Type': 'application/json'});
     }
 
     async readNotes(orderBy, filterBy) {
-        return fetch('/notes/').then((response) => response.json());
+        return fetch(`/notes/?orderBy=${orderBy}&filterBy=${filterBy}`).then((response) => response.json());
     }
 
     async readNote(id) {
-        if (parseInt(id, 10)) {
-            return this.notes.filter((note) => note.id === parseInt(id, 10))[0];
-        }
-        return null;
+        return fetch(`/notes/${id}`).then((response) => response.json());
     }
 
     async createNote(note) {
-        return fetch('/notes/', {method: 'POST', body: JSON.stringify(note)}).then((response) => response.json());
+        return fetch('/notes/', {method: 'POST', headers: this.customHeaders, body: JSON.stringify(note)}).then((response) => response.json());
     }
 
     async updateNote(note) {
-        if (note) {
-            const objIndex = this.notes.findIndex((obj) => obj.id === note.id);
-            this.notes[objIndex] = note;
-        }
+        // eslint-disable-next-line no-underscore-dangle
+        return fetch(`/notes/${note._id}`, {method: 'PUT', headers: this.customHeaders, body: JSON.stringify(note)}).then((response) => response.json());
     }
 
     async deleteNote(id) {

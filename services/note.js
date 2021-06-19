@@ -1,10 +1,11 @@
 export default class Note {
-    constructor(status, subject, description, importance, startDate, finishDate) {
-        this.status = status;
-        this.subject = subject;
-        this.description = description;
-        this.importance = importance;
-        this.startDate = startDate;
-        this.finishDate = finishDate;
+    constructor(obj) {
+        if (obj && obj.startDate && typeof obj.startDate === 'string') {
+            obj.startDate = new Date(obj.startDate);
+        }
+        if (obj && obj.endDate && typeof obj.endDate === 'string') {
+            obj.endDate = new Date(obj.endDate);
+        }
+        Object.assign(this, obj);
     }
 }

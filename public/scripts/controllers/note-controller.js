@@ -9,7 +9,7 @@ export default class NoteController {
         this.changeStyleBtn = document.querySelector('#styles');
         this.createNoteBtn = document.querySelector('#createNote');
 
-        this.finishdateBtn = document.querySelector('#finishDate');
+        this.endDateBtn = document.querySelector('#endDate');
         this.createddateBtn = document.querySelector('#createdDate');
         this.importanceBtn = document.querySelector('#importance');
 
@@ -18,7 +18,7 @@ export default class NoteController {
         this.noteTemplate = Handlebars.compile(document.querySelector('#entry-template').innerHTML);
         this.notesContent = document.querySelector('#notesContent');
 
-        this.orderBy = this.finishdateBtn.dataset.orderby;
+        this.orderBy = this.endDateBtn.dataset.orderby;
         this.filterBy = null;
     }
 
@@ -27,7 +27,7 @@ export default class NoteController {
             window.location.href = 'note.html?note=';
         });
 
-        this.finishdateBtn.addEventListener('click', this.orderEvent.bind(this));
+        this.endDateBtn.addEventListener('click', this.orderEvent.bind(this));
         this.createddateBtn.addEventListener('click', this.orderEvent.bind(this));
         this.importanceBtn.addEventListener('click', this.orderEvent.bind(this));
 
@@ -48,8 +48,10 @@ export default class NoteController {
         deleteButtons.forEach((btn) => {
             btn.addEventListener('click', () => {
                 try {
-                    const deleteResult = noteService.deleteNote(btn.dataset.noteid);
-                    if (deleteResult) this.initializeTemplate();
+                    noteService.deleteNote(btn.dataset.noteid).then((success) => {
+                        console.log(success);
+                        this.initialize();
+                    });
                 } catch (ex) {
                     console.error(ex);
                 }
@@ -99,7 +101,17 @@ export default class NoteController {
         this.getNotes();
     }
 
+    registerHelper(){
+        Handlebars.registerHelper('times', (n, block) => {
+            var accum = '';
+            for(var i = 0; i < n; ++i)
+                accum += block.fn(i);
+            return accum;
+        });
+    }
+
     async initialize() {
+        this.registerHelper();
         this.notes = await noteService.readNotes(this.orderBy);
         this.initEventHandlers();
     }

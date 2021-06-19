@@ -135,6 +135,6 @@ body {
     color:rgb(185, 185, 185);
 }
 
-.importanceicons span .checked{
+.importanceicons span.checked{
     color: black;
 }

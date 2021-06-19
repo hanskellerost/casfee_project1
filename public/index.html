@@ -27,8 +27,8 @@
     </nav>
     <div class="subnav">
       <div class="btn btn-radio">
-        <label for="finishDate">
-          <input id="finishDate" type="radio" name="sorting" value="finishDate" class="hidden" required="required" checked data-orderby="finishDate">
+        <label for="endDate">
+          <input id="endDate" type="radio" name="sorting" value="endDate" class="hidden" required="required" checked data-orderby="endDate">
           <span>By finish Date</span>
         </label>
         <label for="createdDate">
@@ -51,7 +51,7 @@
   <script id="entry-template" type="text/x-handlebars-template">
     <div class="colContent">
       <div class="col1">
-        <span>Nächsten Mittwoch</span>
+        <span>{{endDate}}</span>
         <label for="statusCheckbox">
           <input type="checkbox" id="statusCheckbox" name="statusCheckbox" value="statusCheckbox">
           <span>{{status}} [ Today ]</span>
@@ -60,8 +60,11 @@
       <div class="col2">
         <div>
           <span>{{subject}}</span>
-          <!--<span>CreatedDate: {{startDate}}</span>
-          <span>FinishDate: {{finishDate}}</span>-->
+          <div class="importanceicons">
+            {{#times importance}}
+            <span class="importance fas fa-bolt checked"></span>
+            {{/times}}
+          </div>
         </div>
         <textarea name="description" rows="2" cols="100">{{description}}</textarea>
       </div>

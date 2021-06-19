@@ -1,16 +1,9 @@
-{"subject":"started","description":"CAS FEE Projekt 1","importance":"Selbständige Umsetzung Projekt 1 bis 27.06.2021","startDate":1,"finishDate":"2021-05-23T08:00:00","_id":"1YxYP9P5OP9myBSn","state":"DELETED"}
-{"subject":"started","description":"CAS FEE Projekt 1","importance":"Selbständige Umsetzung Projekt 1 bis 27.06.2021","startDate":1,"finishDate":"2021-05-23T08:00:00","_id":"2BTG3eFpWxnSYmtR","state":"DELETED"}
-{"subject":"started","description":"CAS FEE Projekt 1","importance":"Selbständige Umsetzung Projekt 1 bis 27.06.2021","startDate":1,"finishDate":"2021-05-23T08:00:00","_id":"2eRBtS3EAc8W7f44"}
-{"subject":"started","description":"CAS FEE Projekt 1","importance":"Selbständige Umsetzung Projekt 1 bis 27.06.2021","startDate":1,"finishDate":"2021-05-23T08:00:00","_id":"7E3df2TvRqFYDT3y"}
-{"_id":"D8ZRmqtL0610nO7p"}
-{"_id":"Rk5Mmki3opuRCVz4"}
-{"id":1,"status":"started","subject":"CAS FEE Projekt 1","description":"Selbständige Umsetzung Projekt 1 bis 27.06.2021","importance":1,"startDate":"2021-05-23T08:00:00","finishDate":"2021-05-26T08:00:00","_id":"eXJ6UmYrUmY8A5WS","state":"DELETED"}
-{"subject":"started","description":"CAS FEE Projekt 1","importance":"Selbständige Umsetzung Projekt 1 bis 27.06.2021","startDate":1,"finishDate":"2021-05-23T08:00:00","_id":"gTjY5cRiTNT9iBry","state":"DELETED"}
-{"_id":"nc8yyRL0GDXva7Sm"}
-{"_id":"o2sT1YBom0yijYiW"}
-{"_id":"ohdY7Ff13D2XcXmq"}
-{"subject":"started","description":"CAS FEE Projekt 1","importance":"Selbständige Umsetzung Projekt 1 bis 27.06.2021","startDate":1,"finishDate":"2021-05-23T08:00:00","_id":"zYo4H4mJimRQMPyt","state":"DELETED"}
-{"_id":"Uyal6VPqOd41kwaG"}
-{"_id":"DWAm7mwjqyWIpNI0"}
-{"_id":"OF5huUGKyTrxBDUZ"}
-{"_id":"fwdG8NbLntQPRKhU"}
+{"subject":"Projekt 5","description":"Vogel 5","importance":null,"endDate":"","_id":"4ePBiexjAajqVVMu"}
+{"subject":"Projekt 11","description":"Vogel 11","importance":null,"endDate":{"$$date":1625011200000},"_id":"7HDt5C0GIDETApDh","state":"DELETED"}
+{"subject":"Projekt 2","description":"Dieses Projekt wird als Gruppenarbeit durchgeführt. Zwei Personen bilden dabei das Team. ","importance":5,"_id":"FKGt1ZuQguCJ6Z2f","endDate":{"$$date":1640908800000}}
+{"subject":"Projekt 10","description":"Vogel 10","importance":null,"endDate":{"$$date":1624665600000},"_id":"PccbFCCpCZxcqzNb","state":"DELETED"}
+{"subject":"Projekt XY","description":"Ungelöst","importance":null,"endDate":{"$$date":1625788800000},"_id":"SYLTP0TH5rMmFbNl"}
+{"_id":"ZmoJVpmtuh136BYX","state":"DELETED"}
+{"subject":"Projekt 1","description":"Dieses Projekt dient als Vorbereitung für das Projekt 2. Es wird nicht benötigt jedoch benötigt als Zulassung für Projekt2.","importance":null,"_id":"iZRkTmnqT6nADjsx","endDate":{"$$date":1624752000000}}
+{"_id":"mwGALuhiZK6ftrxG","subject":"Projekt 3","description":"Vogel 3","importance":null,"endDate":null,"state":"DELETED"}
+{"subject":"Projekt XYZ","description":"ajskldfjalksjdfklasdf","importance":null,"endDate":{"$$date":1628294400000},"_id":"pFoNBJOSCaaLhC04","startDate":"1970-01-01T00:00:00.000Z"}
