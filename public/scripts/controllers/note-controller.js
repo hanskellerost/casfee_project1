@@ -1,5 +1,4 @@
 /* global Handlebars */
-// import moment from 'moment';
 import { noteService } from '../services/note-service.js';
 
 export default class NoteController {
@@ -10,7 +9,7 @@ export default class NoteController {
         this.createNoteBtn = document.querySelector('#createNote');
 
         this.endDateBtn = document.querySelector('#endDate');
-        this.createddateBtn = document.querySelector('#createdDate');
+        this.startDateBtn = document.querySelector('#startDate');
         this.importanceBtn = document.querySelector('#importance');
 
         this.filterBtn = document.querySelector('#showFinished');
@@ -18,8 +17,13 @@ export default class NoteController {
         this.noteTemplate = Handlebars.compile(document.querySelector('#entry-template').innerHTML);
         this.notesContent = document.querySelector('#notesContent');
 
+        this.dateFormats = {
+                short: 'DD MMMM - YYYY',
+                long: 'dddd DD.MM.YYYY HH:mm',
+        };
+
         this.orderBy = this.endDateBtn.dataset.orderby;
-        this.filterBy = null;
+        this.filterBy = 'finished';
     }
 
     initButtons() {
@@ -28,7 +32,7 @@ export default class NoteController {
         });
 
         this.endDateBtn.addEventListener('click', this.orderEvent.bind(this));
-        this.createddateBtn.addEventListener('click', this.orderEvent.bind(this));
+        this.startDateBtn.addEventListener('click', this.orderEvent.bind(this));
         this.importanceBtn.addEventListener('click', this.orderEvent.bind(this));
 
         this.filterBtn.addEventListener('change', this.filteringEvent.bind(this));
@@ -59,6 +63,28 @@ export default class NoteController {
         });
     }
 
+    initStateCheckbox() {
+        const stateCheckboxes = document.querySelectorAll('.stateCheckbox');
+        stateCheckboxes.forEach((chb) => {
+            chb.addEventListener('change', async () => {
+                try {
+                    // eslint-disable-next-line no-underscore-dangle
+                    const note = this.notes.find((n) => n._id === chb.dataset.noteid);
+                    if (note) {
+                        note.state = chb.checked === true ? 'finished' : null;
+                        note.endDate = chb.checked === true ? Date.now() : null;
+                        await noteService.updateNote(note);
+                        this.initialize();
+                    } else {
+                        throw new Error('Cloud not update the note. Please refresh the page.');
+                    }
+                } catch (ex) {
+                    console.error(ex);
+                }
+            });
+        });
+    }
+
     initStyleSelect() {
         this.changeStyleBtn.addEventListener('change', () => {
             document.body.classList.toggle('dark-theme');
@@ -68,8 +94,6 @@ export default class NoteController {
     initEventHandlers() {
         this.initStyleSelect();
         this.initButtons();
-
-        this.initializeTemplate();
     }
 
     initializeTemplate() {
@@ -84,15 +108,16 @@ export default class NoteController {
 
         this.initEditButton();
         this.initDeleteButton();
+        this.initStateCheckbox();
     }
 
-    getNotes() {
-        this.notes = noteService.readNotes(this.orderBy, this.filterBy);
+    async getNotes() {
+        this.notes = await noteService.readNotes(this.orderBy, this.filterBy);
         this.initializeTemplate();
     }
 
     filteringEvent(ev) {
-        this.filterBy = ev.target.checked ? ev.target.dataset.filterby : null;
+        this.filterBy = ev.target.checked ? null : ev.target.dataset.filterby;
         this.getNotes();
     }
 
@@ -101,20 +126,37 @@ export default class NoteController {
         this.getNotes();
     }
 
-    registerHelper(){
+    registerHelpers() {
         Handlebars.registerHelper('times', (n, block) => {
-            var accum = '';
+            let accum = '';
             for(var i = 0; i < n; ++i)
                 accum += block.fn(i);
             return accum;
         });
+
+        Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
+            return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+        });
+
+        Handlebars.registerHelper("formatDate", function(datetime) {
+            if (!datetime || new Date(datetime) < new Date('2000-01-01')) return '';
+
+            const date = new Date(datetime);
+            const monthLeadingZero = ('0'.concat((date.getMonth() + 1))).slice(-2);
+            const dayLeadingZero = ('0'.concat(date.getDate())).slice(-2);
+            return `${date.getFullYear()}-${monthLeadingZero}-${dayLeadingZero}`;
+        });
     }
 
     async initialize() {
-        this.registerHelper();
-        this.notes = await noteService.readNotes(this.orderBy);
         this.initEventHandlers();
+        this.getNotes();
+    }
+
+    firstInitialize() {
+        this.registerHelpers();
+        this.initialize();
     }
 }
 
-new NoteController().initialize();
+new NoteController().firstInitialize();

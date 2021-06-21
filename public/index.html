@@ -6,6 +6,7 @@
   <title>Note App</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js"
     integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU=" crossorigin="anonymous" defer></script>
+  <script src="https://kit.fontawesome.com/ca66a7c21a.js" crossorigin="anonymous"></script>
 
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
@@ -31,8 +32,8 @@
           <input id="endDate" type="radio" name="sorting" value="endDate" class="hidden" required="required" checked data-orderby="endDate">
           <span>By finish Date</span>
         </label>
-        <label for="createdDate">
-          <input id="createdDate" type="radio" name="sorting" value="createdDate" class="hidden" required="required" data-orderby="createdDate">
+        <label for="startDate">
+          <input id="startDate" type="radio" name="sorting" value="startDate" class="hidden" required="required" data-orderby="startDate">
           <span>By created Date</span>
         </label>
         <label for="importance">
@@ -51,10 +52,14 @@
   <script id="entry-template" type="text/x-handlebars-template">
     <div class="colContent">
       <div class="col1">
-        <span>{{endDate}}</span>
-        <label for="statusCheckbox">
-          <input type="checkbox" id="statusCheckbox" name="statusCheckbox" value="statusCheckbox">
-          <span>{{status}} [ Today ]</span>
+        <span>{{formatDate startDate}}</span>
+        <label for="stateCheckbox{{_id}}">
+          <input type="checkbox" id="stateCheckbox{{_id}}" name="stateCheckbox" class="stateCheckbox" {{#ifEquals state 'finished'}}checked{{/ifEquals}} data-noteid="{{_id}}">
+          {{#ifEquals state 'finished'}}
+          <span>{{state}} [{{formatDate endDate}}]</span>
+          {{else}}
+          <span>{{formatDate endDate}}</span>
+          {{/ifEquals}}
         </label>
       </div>
       <div class="col2">
@@ -62,7 +67,7 @@
           <span>{{subject}}</span>
           <div class="importanceicons">
             {{#times importance}}
-            <span class="importance fas fa-bolt checked"></span>
+            <span class="fas fa-bolt checked"></span>
             {{/times}}
           </div>
         </div>

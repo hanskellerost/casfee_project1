@@ -20,7 +20,7 @@ export class NoteService {
 
     async updateNote(note) {
         // eslint-disable-next-line no-underscore-dangle
-        return fetch(`/notes/${note._id}`, {method: 'PUT', headers: this.customHeaders, body: JSON.stringify(note)}).then((response) => response.json());
+        return fetch(`/notes/${note._id}`, {method: 'PUT', headers: this.customHeaders, body: JSON.stringify(note)});
     }
 
     async deleteNote(id) {

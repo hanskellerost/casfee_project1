@@ -62,7 +62,7 @@ export default class NoteDetailController {
         this.note.subject = noteFormData.get('title');
         this.note.description = noteFormData.get('description');
         this.note.importance = this.getImportance();
-        this.note.startDate = this.note.startDate === '' ? Date.now() : this.note.startDate;
+        this.note.startDate = !this.note.startDate || this.note.startDate === '' ? this.formatDateLeadingZero(new Date(Date.now())) : this.note.startDate;
         this.note.endDate = noteFormData.get('endDate');
 
         // eslint-disable-next-line no-underscore-dangle
@@ -92,12 +92,15 @@ export default class NoteDetailController {
         }
     }
 
+    formatDateLeadingZero(date) {
+        const monthLeadingZero = ('0'.concat((date.getMonth() + 1))).slice(-2);
+        const dayLeadingZero = ('0'.concat(date.getDate())).slice(-2);
+        return `${date.getFullYear()}-${monthLeadingZero}-${dayLeadingZero}`;
+    }
+
     initNote() {
         if (this.note?.endDate) {
-            const tempEndDate = new Date(this.note.endDate);
-            const monthLeadingZero = ('0'.concat((tempEndDate.getMonth() + 1))).slice(-2);
-            const dayLeadingZero = ('0'.concat(tempEndDate.getDate())).slice(-2);
-            this.note.endDate = `${tempEndDate.getFullYear()}-${monthLeadingZero}-${dayLeadingZero}`;
+            this.note.endDate = this.formatDateLeadingZero(new Date(this.note.endDate));
         }
 
         this.noteContent.innerHTML = this.noteTemplate(this.note);

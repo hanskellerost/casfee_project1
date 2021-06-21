@@ -7,10 +7,14 @@ export class NoteStore {
     }
 
     async all(queryparams, callback) {
-        // return await this.db.cfind({orderedBy : currentUser}).sort({ orderDate: -1 }).exec();
-        //this.db.find({orderedBy: queryparams.orderedBy}).exec((err, docs) => {
-        //this.db.find({state: { $ne: 'DELETED' }, endDate: { $ne: '' }}).sort({`${queryparams.orderedBy}:-1` }).exec((err, docs) => {
-            this.db.find({state: { $ne: 'DELETED' }, endDate: { $ne: '' }}).exec((err, docs) => {
+        const searchterm = {};
+        if (queryparams?.orderBy === 'importance') {
+            searchterm[queryparams?.orderBy] = -1;
+        } else if (queryparams?.orderBy) {
+            searchterm[queryparams?.orderBy] = 1;
+        }
+
+        this.db.find({state: { $nin: ['DELETED', queryparams.filterBy]}}).sort(searchterm).exec((err, docs) => {
             if (callback) {
                 callback(err, docs);
             }
@@ -18,7 +22,6 @@ export class NoteStore {
     }
 
     create(note, callback) {
-        //const newNote = new Note(note.status, note.subject, note.description, note.importance, note.startDate, note.finishDate);
         const newNote = new Note(note);
         this.db.insert(newNote, (err, newDoc) => {
             if (callback) {
@@ -35,8 +38,6 @@ export class NoteStore {
 
     update(note, callback) {
         // eslint-disable-next-line no-underscore-dangle
-        console.log(note);
-        console.log(typeof(note));
         note.endDate = new Date(note.endDate);
         this.db.update({_id: note._id}, note, {}, (err, newDoc) => {
             if (callback) {
