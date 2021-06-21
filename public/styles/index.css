@@ -31,15 +31,15 @@ body {
     margin-bottom: 1em;
 }
 
-.layout ul, li {
-    list-style: none;
-    margin-left: 0;
-    padding-left: 0;
-}
-
 .layout li {
     display: flex;
     justify-content: space-between;
+}
+
+.layout ul > li {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
 }
 
 .layout .colContent {
@@ -48,38 +48,27 @@ body {
     justify-content: space-between;
 }
 
-.layout .col1, .col2 {
+.layout .col1,
+.layout .col2 {
+    min-width: 200px;
     display: flex;
     flex-direction: column;
-    margin: 1em 3em 0em 0em;
+    margin: 1em 3em 0 0;
 }
 
 .layout .buttons {
     align-self: flex-end;
 }
 
-/* Toggle & Checkbox Buttons */
-.btn form > div {
-    margin-bottom: 1em; overflow: auto;
+.importanceicons span {
+    margin-right: 0.5em;
+    color: rgb(185, 185, 185);
 }
 
-.btn label {
-    display: block;
-    float: left;
-}
-
-.btn {
-    box-shadow: 3px 3px rgb(124, 124, 124);
-}
-
-.btn .hidden {
-    opacity: 0; 
-    position: absolute; 
-    pointer-events: none;
-}
-
-.btn label:first-child span {
-    border-left: 1px solid black;
+/* Layout for one note */
+.note {
+    display: flex;
+    flex-direction: column;
 }
 
 .btn span {
@@ -92,28 +81,14 @@ body {
     border-left: 0;
 }
 
-.btn input:checked + span {
-    background: silver;
-}
-
-.btn input:hover + span {
-    background: silver;
-}
-
-/* Layout for one note */
-.note {
-    display: flex;
-    flex-direction: column;
-}
-
-.note > * {
-    margin-top: 0.5em;
-}
-
 .note label > span {
     width: 250px;
     display: inline-block;
     vertical-align: top;
+}
+
+.note > * {
+    margin-top: 0.5em;
 }
 
 .buttonContainer {
@@ -130,11 +105,39 @@ body {
     display: inline;
 }
 
-.importanceicons span {
-    margin-right: 0.5em;
-    color:rgb(185, 185, 185);
+.importanceicons span.checked {
+    color: black;
 }
 
-.importanceicons span.checked{
-    color: black;
+/* Toggle & Checkbox Buttons */
+.btn form > div {
+    margin-bottom: 1em;
+    overflow: auto;
+}
+
+.btn label {
+    display: block;
+    float: left;
+}
+
+.btn {
+    box-shadow: 3px 3px rgb(124, 124, 124);
+}
+
+.btn input:hover + span {
+    background: silver;
+}
+
+.btn .hidden {
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+.btn label:first-child span {
+    border-left: 1px solid black;
+}
+
+.btn input:checked + span {
+    background: silver;
 }

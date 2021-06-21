@@ -1,15 +1,5 @@
-{"subject":"Projekt 2","description":"Dieses Projekt wird als Zweierteam durchgeführt.","importance":4,"startDate":"2021-06-20T00:00:00.000Z","endDate":{"$$date":1624254677337},"_id":"0PKzJrwwaErtBbdZ","state":"finished"}
+{"subject":"Projekt 2","description":"Dieses Projekt wird als Zweierteam durchgeführt.","importance":4,"startDate":"2021-06-20T00:00:00.000Z","endDate":{"$$date":0},"_id":"0PKzJrwwaErtBbdZ","state":null}
 {"subject":"Projekt 5","description":"Vogel 5","importance":null,"endDate":"","_id":"4ePBiexjAajqVVMu","state":"DELETED"}
-{"subject":"Projekt 11","description":"Vogel 11","importance":null,"endDate":{"$$date":1625011200000},"_id":"7HDt5C0GIDETApDh","state":"DELETED"}
-{"_id":"FKGt1ZuQguCJ6Z2f","state":null,"endDate":{"$$date":0},"subject":"Projekt 1","description":"Dieses Projekt wird als Einzelarbeit durchgeführt. Es dient als Zulassung für Projekt 2.","importance":4,"startDate":"2021-06-20"}
-{"subject":"asdfasdf","description":"asdfasdf","importance":5,"startDate":"2021-06-20T00:00:00.000Z","endDate":{"$$date":1601510400000},"_id":"HSZ9dysNYRaNtVhz","state":null}
-{"subject":"Brunch","description":"Mit Marisa","importance":5,"endDate":{"$$date":1624147200000},"_id":"JOs1RPKROqhvN4wQ","state":"DELETED"}
-{"subject":"Projekt 10","description":"Vogel 10","importance":null,"endDate":{"$$date":1624665600000},"_id":"PccbFCCpCZxcqzNb","state":"DELETED"}
-{"subject":"Projekt 100","description":"akldfjklajsldfjlk","importance":1,"startDate":"2021-06-21T00:00:00.000Z","endDate":{"$$date":1624255711023},"_id":"Q00MotDlfWpatIjM","state":"finished"}
-{"_id":"SYLTP0TH5rMmFbNl","state":"DELETED","endDate":{"$$date":1624177348713}}
-{"_id":"ZmoJVpmtuh136BYX","state":"DELETED"}
-{"_id":"iZRkTmnqT6nADjsx","state":"DELETED","endDate":{"$$date":1624177399570}}
-{"_id":"mwGALuhiZK6ftrxG","subject":"Projekt 3","description":"Vogel 3","importance":null,"endDate":null,"state":"DELETED"}
-{"_id":"pFoNBJOSCaaLhC04","state":"DELETED","endDate":{"$$date":1624177404318}}
-{"subject":"Brunch 2","description":"Test2 ","importance":3,"startDate":1624179405102,"endDate":{"$$date":1604188800000},"_id":"qoxGpMUlVvZpP7jQ","state":null}
-{"_id":"FKGt1ZuQguCJ6Z2f","state":null,"endDate":{"$$date":1593216000000},"subject":"Projekt 1","description":"Dieses Projekt wird als Einzelarbeit durchgeführt. Es dient als Zulassung für Projekt 2.","importance":4,"startDate":"2021-06-20"}
+{"subject":"Projekt 2","description":"Folgeprojekt von Projekt 1 welches in Zweierteams absolviert wird.","importance":5,"startDate":"2021-06-20T00:00:00.000Z","endDate":{"$$date":1640908800000},"_id":"HSZ9dysNYRaNtVhz","state":null}
+{"subject":"Vorprojekt zum CAS","description":"Dies dient Quereinsteiger als Unterstützungskurs.","importance":1,"startDate":"2021-06-21T00:00:00.000Z","endDate":{"$$date":1624302638712},"_id":"d8o0EsXNXYgQPh9k","state":"finished"}
+{"subject":"Projekt 1 Kontrolle linting","description":"Das Projekt soll kontrolliert werden auf Codestyling. (HTML, CSS und Javascript)","importance":5,"startDate":{"$$date":1624233600000},"endDate":{"$$date":1624233600000},"_id":"ggexmzJzE27yt7hi"}

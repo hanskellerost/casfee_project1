@@ -32,7 +32,6 @@ export class NoteController {
     async updateNote(req, res) {
         noteStore.update(req.body, (err, note) => {
             if (err) {
-                console.log(err);
                 res.status(500).send();
             }
 

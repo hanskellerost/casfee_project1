@@ -1,5 +1,5 @@
 import express from 'express';
-import {noteRoutes} from './routes/noteRoutes.js';
+import noteRoutes from './routes/noteRoutes.js';
 
 const app = express();
 const hostname = '127.0.0.1';
@@ -16,5 +16,5 @@ app.listen(port, hostname, () => {
 });
 
 /* Fragen Michael Gfeller
-- ES Lint no_param_reassign bei arrow function?
+- ES Lint anschauen
 */

@@ -21,7 +21,7 @@ export class NoteStore {
         });
     }
 
-    create(note, callback) {
+    async create(note, callback) {
         const newNote = new Note(note);
         this.db.insert(newNote, (err, newDoc) => {
             if (callback) {
@@ -30,15 +30,15 @@ export class NoteStore {
         });
     }
 
-    read(id, callback) {
+    async read(id, callback) {
         this.db.findOne({ _id: id }, (err, doc) => {
             callback(err, doc);
         });
     }
 
-    update(note, callback) {
-        // eslint-disable-next-line no-underscore-dangle
+    async update(note, callback) {
         note.endDate = new Date(note.endDate);
+        // eslint-disable-next-line no-underscore-dangle
         this.db.update({_id: note._id}, note, {}, (err, newDoc) => {
             if (callback) {
                 callback(err, newDoc);
@@ -46,7 +46,7 @@ export class NoteStore {
         });
     }
 
-    delete(id, callback) {
+    async delete(id, callback) {
         this.db.update({ _id: id }, { $set: { state: 'DELETED' } }, { returnUpdatedDocs: true }, (err, numDocs, doc) => {
             callback(err, doc);
         });

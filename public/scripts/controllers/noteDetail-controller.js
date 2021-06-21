@@ -1,5 +1,4 @@
 /* global Handlebars */
-// import moment from 'moment';
 import { noteService } from '../services/note-service.js';
 import Note from '../services/note.js';
 
