@@ -7,17 +7,13 @@ export default class NoteController {
 
         this.changeStyleBtn = document.querySelector('#styles');
         this.createNoteBtn = document.querySelector('#createNote');
-
-        this.endDateBtn = document.querySelector('#endDate');
-        this.startDateBtn = document.querySelector('#startDate');
-        this.importanceBtn = document.querySelector('#importance');
-
         this.filterBtn = document.querySelector('#showFinished');
+        this.orderButtons = document.querySelectorAll('.order');
 
         this.noteTemplate = Handlebars.compile(document.querySelector('#entry-template').innerHTML);
         this.notesContent = document.querySelector('#notesContent');
 
-        this.orderBy = this.endDateBtn.dataset.orderby;
+        this.orderBy = this.orderButtons[0].dataset.orderby;
         this.filterBy = 'finished';
     }
 
@@ -26,14 +22,14 @@ export default class NoteController {
             window.location.href = 'note.html?note=';
         });
 
-        this.endDateBtn.addEventListener('click', this.orderEvent.bind(this));
-        this.startDateBtn.addEventListener('click', this.orderEvent.bind(this));
-        this.importanceBtn.addEventListener('click', this.orderEvent.bind(this));
-
         this.filterBtn.addEventListener('change', this.filteringEvent.bind(this));
+
+        this.orderButtons.forEach((oBtn) => {
+            oBtn.addEventListener('click', this.orderEvent.bind(this));
+        });
     }
 
-    initEditButton() {
+    static initEditButton() {
         const editButtons = document.querySelectorAll('.editNoteBtn');
 
         editButtons.forEach((btn) => {
@@ -93,7 +89,7 @@ export default class NoteController {
             this.notesContent.appendChild(divElement);
         });
 
-        this.initEditButton();
+        NoteController.initEditButton();
         this.initDeleteButton();
         this.initStateCheckbox();
     }
@@ -113,7 +109,7 @@ export default class NoteController {
         this.getNotes();
     }
 
-    async registerHelpers() {
+    static async registerHelpers() {
         Handlebars.registerHelper('times', (n, block) => {
             let accum = '';
             for (let i = 0; i < n; ++i) {
@@ -122,12 +118,11 @@ export default class NoteController {
             return accum;
         });
 
-        // Handlebars.registerHelper('ifEquals', (arg1, arg2, options) => {
-        //     return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
-        // });
+        // doesn't work with as arrow function
+        // Handlebars.registerHelper('ifEquals', (arg1, arg2, options) => ((arg1 === arg2) ? options.fn(this) : options.inverse(this)));
 
-        Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
-            return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+        Handlebars.registerHelper('ifEquals', function (arg1, arg2, options) {
+            return (arg1 === arg2) ? options.fn(this) : options.inverse(this);
         });
 
         Handlebars.registerHelper('formatDate', (datetime) => {
@@ -146,7 +141,7 @@ export default class NoteController {
     }
 
     firstInitialize() {
-        this.registerHelpers();
+        NoteController.registerHelpers();
         this.initialize();
     }
 }

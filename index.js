@@ -16,5 +16,5 @@ app.listen(port, hostname, () => {
 });
 
 /* Fragen Michael Gfeller
-- ES Lint anschauen
+- Die letzte eslint Verletzung wie hätte diese korrigiert werden können? Habe daher den Code noch kommentiert drin gelassen.
 */
